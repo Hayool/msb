@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>발주닷컴-쇼핑</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- App favicon -->
+        <link rel="#" href="#">
+
+        <!-- third party css -->
+		<link href="assets/css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/vendor/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+        <!-- third party css end -->
+
+        <!-- App css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+		
+		<!-- font -->
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
+		
+		<style>
+			@media (max-width: 767.98px){
+				.mute {
+					display: none;
+				}
+				.fixBtn {
+					width: 100%;
+					position: fixed;
+					bottom: 0px;
+					right: 0px;
+					left: 0px;
+				}
+				.container-fluid {
+					padding: 0;
+				}
+				.card-body {
+					padding: 12px;
+				}
+				.card-sm-font {
+					font-size: 0.75rem;
+				}
+				.card-xs-font {
+					font-size: 0.7rem;
+				}
+				.card {
+				margin-bottom: 10px;
+				}
+				.pName2 {
+				width: 145px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				}
+				.pName3 {
+				width: 250px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				}
+				.logo-center {
+					text-align: center;
+				}
+			}
+			
+			@media (min-width: 400px) and (max-width: 767.98px) {
+				.pName2 {
+				width: 160px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				}
+				.pName3 {
+				width: 300px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				}
+			}
+			
+			@media (min-width: 768px){
+				.fixBtn {
+					width: 50%;
+				}
+				.card {
+				margin-bottom: 15px;
+				}
+
+			}
+
+			.toolbar {
+				float: left;
+			}
+			.toolbar2 {
+				float: left;
+			}
+			.pName {
+				width: 250px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			.plpr0 {
+				padding-left: 0;
+				padding-right: 0;
+			}
+			
+			.container-fluid {
+				padding: 0;
+			}
+			
+			
+			.qty .count {
+				text-align: center;
+				border: 1px solid #DDDDDD; 
+				border-radius: 2px; 
+				box-shadow: none;
+			}
+			.qty .plus {
+				cursor: pointer;
+				}
+			.qty .minus {
+				cursor: pointer;
+			}
+			.wrapper {
+				margin-top: 70px;
+			}
+			
+			input:disabled{
+				background-color:white;
+			}
+			
+			.black {
+				color: black;
+			}
+			
+			.product-img {
+				width: 40px;
+				height: 40px;
+				display: inline-block; 
+				background-position: center;
+				background-size: 40px;
+				background-repeat: no-repeat;
+				vertical-align: middle;
+			}
+			
+			.category-table{height:550px;overflow-y:scroll;} 			
+
+			.product-table{height:550px;overflow:scroll;} 
+
+			.fixed-head th{position: sticky;top: 0;z-index: 10; border-bottom: thick; border-top: thick}
+			
+			.nowrap {
+				white-space: nowrap;
+			}
+
+
+		</style>
+    </head>
+
+    <body data-layout="detached"  style="background-color: #F2F5F7">
+		
+		<!-- Topbar Start -->
+		<div class="navbar-custom topnav-navbar topnav-navbar-light sticky-top">
+			<div class="container-fluid logo-center">
+
+				<!-- LOGO -->
+
+				<button class="button-menu-mobile open-left disable-btn p-0">
+					<i class="mdi mdi-menu"></i>
+				</button>
+				<a href="index.html" class="topnav-logo p-0 d-inline-block" style="float: none;">
+					<span class="topnav-logo-lg">
+						<img src="assets/images/tibalogo_1.jpeg" alt="" height="50">
+					</span>
+					<span class="topnav-logo-sm">
+						<img src="assets/images/tibalogo_1.jpeg" alt="" height="30">
+					</span>
+				</a>
+
+				<ul class="list-unstyled topbar-right-menu float-right mb-0" style="margin: 0 4px;">
+
+					<li class="dropdown notification-list">
+						<a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" id="topbar-notifydrop"
+							role="button" aria-haspopup="true" aria-expanded="false">
+							<i class="mdi mdi-dots-horizontal noti-icon"></i>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
+							aria-labelledby="topbar-notifydrop">
+
+							<!-- item-->
+							<a href="notification.html" class="dropdown-item notify-item" >
+								<i class="mdi mdi-bell-outline mr-1"></i>
+								<span>공지사항</span>
+							</a>
+					
+							<!-- item-->
+							<a href="dealings.html" class="dropdown-item notify-item">
+								<i class="mdi mdi-content-copy mr-1"></i>
+								<span>거래장부 열람</span>
+							</a>
+
+							<!-- item-->
+							<a href="javascript:void(0);" class="dropdown-item notify-item" data-toggle="modal" data-target="#myShop">
+								<i class="mdi mdi-account-circle mr-1"></i>
+								<span>매장리스트</span>
+							</a>
+
+							<!-- item-->
+							<a href="javascript:void(0);" class="dropdown-item notify-item" data-toggle="modal" data-target="#changePassword">
+								<i class="mdi mdi-lock-outline mr-1"></i>
+								<span>비밀번호 변경</span>
+							</a>
+
+							<!-- item-->
+							<a href="pages-login.html" class="dropdown-item notify-item" data-toggle="modal" data-target="#logout">
+								<i class="mdi mdi-logout mr-1"></i>
+								<span>로그아웃</span>
+							</a>
+
+						</div>
+					</li>
+
+				</ul>
+
+		  </div>
+
+
+		</div>
+		<!-- end Topbar -->
+
+				<!--팝업모음-->
+
+				<!--매장리스트-->
+				<div id="myShop" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">매장 리스트</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="slimscroll" style="max-height: 230px;">
+
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item">
+										<span class="notify-details">●&nbsp;&nbsp;버거킹 송도점</span>
+									</a>
+
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item notify-item">
+										<span class="notify-details">●&nbsp;&nbsp;롯데리아 연수점</span>
+									</a><!-- item-->
+
+									<a href="javascript:void(0);" class="dropdown-item notify-item">
+										<span class="notify-details">●&nbsp;&nbsp;bbg 송도첨단점</span>
+									</a><!-- item-->
+
+									<a href="javascript:void(0);" class="dropdown-item notify-item">
+										<span class="notify-details">●&nbsp;&nbsp;피자헛 동춘점</span>
+									</a>
+
+								</div>
+
+							</div>
+
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+
+				<!--비밀번호 변경-->
+				<div id="changePassword" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">비밀번호 변경</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body pt-0">
+								<div class="text-center mt-2 mb-4">
+
+								</div>
+
+								<form class="pl-3 pr-3" action="#">
+
+									<div class="form-group">
+										<label for="currentPass">기존 비밀번호</label>
+										<input class="form-control" type="password" id="currentPass" required="" placeholder="">
+									</div>
+
+									<div class="form-group">
+										<label for="newPass">새 비밀번호</label>
+										<input class="form-control" type="password" id="newPass" required="" placeholder="">
+									</div>
+
+									<div class="form-group">
+										<label for="newPass">새 비밀번호 확인</label>
+										<input class="form-control" type="password" id="newPassConfirm" required="" placeholder="">
+									</div>
+
+									<div class="form-group text-center mt-3">
+										<button class="btn btn-primary" type="submit">변경하기</button>
+									</div>
+
+								</form>
+
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+
+				<!--로그아웃 완료-->
+				<div id="logout" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content modal-filled bg-success">
+							<div class="modal-body p-4">
+								<div class="text-center">
+									<i class="dripicons-checkmark h1"></i>
+									<h4 class="mt-2">로그아웃 완료</h4>
+									<p class="mt-3">성공적으로 로그아웃 되셨습니다.</p>
+									<a href="login.html" class="btn btn-light my-2">확인</a>
+								</div>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+
+				<!-- 공지사항 -->
+				<div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-scrollable" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">공지사항</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<img src="assets/images/20160905_notice.jpg" class="img-fluid" alt="Responsive image">
+								<p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
+									eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+								<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue
+									laoreet rutrum faucibus dolor auctor.</p>
+								<p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
+									consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+								<p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
+									eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+								<p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
+									consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+								<p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
+									eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+
+        <div class="container-fluid">
+
+            <div class="wrapper">
+                                <!-- ========== Left Sidebar Start ========== -->
+                                <div class="left-side-menu left-side-menu-detached pt-2">
+
+                                    <!--- Sidemenu -->
+                                    <ul class="metismenu side-nav side-nav-light">
+
+                                        <li class="side-nav-title side-nav-item" style="font-size: 14px">배송 요일별 주문시간대</li>
+
+                        
+                                        <li class="side-nav-item">
+                                            <a href="javascript: void(0);" class="side-nav-link pt-1">
+                                                <i class="dripicons-heart"></i>
+                                                <span> 선주문 </span>
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul class="side-nav-second-level ml-5" aria-expanded="">
+                                                <li class="mb-2"><b>월&nbsp;</b>[ 일 05:00 - 월 05:00 ]</li>
+                                                <li class="mb-2"><b>화&nbsp;</b>[ 월 05:00 - 화 05:00 ]</li>
+                								<li class="mb-2"><b>수&nbsp;</b>[ 화 05:00 - 수 05:00 ]</li>
+                								<li class="mb-2"><b>목&nbsp;</b>[ 수 05:00 - 목 05:00 ]</li>
+                								<li class="mb-2"><b>금&nbsp;</b>[ 목 05:00 - 금 05:00 ]</li>
+                								<li class="mb-2"><b>토&nbsp;</b>[ 금 05:00 - 토 05:00 ]</li>
+                								<li class="mb-3"><b>일&nbsp;</b>[ 주문없음 ]</li>
+                                            </ul>
+                                        </li>
+                                        <li class="side-nav-item">
+                                            <a href="javascript: void(0);" class="side-nav-link pt-0">
+                                                <i class="dripicons-document"></i>
+                                                <span> 일반주문 </span>
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul class="side-nav-second-level ml-5" aria-expanded="">
+                                                <li class="mb-2"><b>월&nbsp;</b>[ 일 05:00 - 월 05:00 ]</li>
+                                                <li class="mb-2"><b>화&nbsp;</b>[ 월 05:00 - 화 05:00 ]</li>
+                								<li class="mb-2"><b>수&nbsp;</b>[ 화 05:00 - 수 05:00 ]</li>
+                								<li class="mb-2"><b>목&nbsp;</b>[ 수 05:00 - 목 05:00 ]</li>
+                								<li class="mb-2"><b>금&nbsp;</b>[ 목 05:00 - 금 05:00 ]</li>
+                								<li class="mb-2"><b>토&nbsp;</b>[ 금 05:00 - 토 05:00 ]</li>
+                								<li class="mb-1"><b>일&nbsp;</b>[ 주문없음 ]</li>
+                                            </ul>
+                                        </li>
+						
+                						<li class="side-nav-title side-nav-item mt-3" style="font-size: 14px">나의 주문현황</li>
+						
+                						<li class="side-nav-item">
+                                            <a href="javascript: void(0);" class="side-nav-link pt-1">
+                                                <i class="dripicons-alarm"></i>
+                                                <span> 주문일정 현황 </span>
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul class="side-nav-second-level" aria-expanded="">
+                                                <li>
+                                                    <a href="javascript: void(0);"><b>주문남은시간 </b></a>
+                									<p class="mb-1 ml-5">00:00:00(일반)</p>
+                									<p class="mt-0 ml-5">00:00:00(선)</p>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript: void(0);"><b>배송일자 </b></a>
+                									<p class="mb-1 ml-5">00:00:00(일반)</p>
+                									<p class="mt-0 ml-5">00:00:00(선)</p>
+                                                </li>
+							
+                                            </ul>
+                                        </li>
+                						<li class="side-nav-item">
+                                            <a href="javascript: void(0);" class="side-nav-link pt-0">
+                                                <i class="dripicons-card"></i>
+                                                <span> 주문결제 현황 </span>
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul class="side-nav-second-level" aria-expanded="">
+                                                <li>
+                                                    <a href="javascript: void(0);"><b>기존미수금 </b></a>
+                									<p class="mb-1 ml-5">5,814,832원</p>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript: void(0);"><b>주문진행금액 </b></a>
+                									<p class="mb-1 ml-5">2,200,000원</p>
+                                                </li><li>
+                                                    <a href="javascript: void(0);"><b>최종미수금 </b></a>
+                									<p class="mb-1 ml-5" style="color:#fa5c7c";>8,014,832원</p>
+                                                </li><li>
+                                                    <a href="javascript: void(0);"><b>여신한도 </b></a>
+                									<p class="mb-1 ml-5">9,200,000원</p>
+                                                </li>
+							
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+
+                                    <!-- Help Box -->
+                                    <div class="help-box help-box-light text-center" style="margin-top: 20px;">
+						
+                                        <p class="mt-1 mb-1 font-10">입금계좌 : 우리은행</p>
+                						<p class="mb-3 font-weight-bold">1002-4231-3354</p>
+                                        <p class="mb-1 font-10">담당자 : 김관리/김배송</p>
+                						<p class="mb-3 font-weight-bold">010-4231-3354</p>
+                						<p class="mb-1 font-10">배송기사 : 라배송</p>
+                						<p class="mb-3 font-weight-bold">010-2477-8901</p>
+                						<p class="mb-1 font-10">전자세금계산서 발행 메일 : </p>
+                						<p class="mb-3 font-weight-bold">retnebsm@revan.moc</p>
+                                        <a href="javascript: void(0);" class="btn btn-outline-primary btn-sm mb-1">본사 홈페이지</a>
+                                    </div>
+                                    <!-- end Help Box -->
+                                    <!-- End Sidebar -->
+
+                                    <div class="clearfix"></div>
+                                    <!-- Sidebar -left -->
+
+                                </div>
+                                <!-- Left Sidebar End -->                
+
+                <div class="content-page pb-3">
+                    <div class="content">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+								<div class="card-body p-1">
+									<!--웹용 테이블-->
+									<table class="table table-borderless mb-0 mute" style="table-layout: fixed;">
+									  <thead align="left">
+										<tr>
+										  <th class="pb-0" style="border-right: solid thin #e3eaef">일반 품목</th>
+										  <th class="pb-0" style="border-right: solid thin #e3eaef">공급가액</th>
+										  <th class="pb-0" style="border-right: solid thin #e3eaef">부가세액</th>
+										  <th class="pb-0">합계</th>
+										</tr>
+									  </thead>
+									  <tbody align="right">
+										<tr style="font-size: 20px; font-weight: bold">
+										  <td class="" style="border-right: solid thin #e3eaef">3 개</td>
+										  <td class="" style="border-right: solid thin #e3eaef">370,000 원</td>
+										  <td class="" style="border-right: solid thin #e3eaef">74,000 원</td>
+										  <td class="" style=" color: #0acf97">374,000 원</td>
+										  </tr>
+									  </tbody>
+									</table>
+									
+									<!--모바일용 테이블-->
+									<table class="table table-borderless table-sm mb-0 d-md-none" style="table-layout: fixed;">
+									  <thead >
+										<tr>
+										  <th class="card-sm-font p-1" style="border-right: solid thin #e3eaef; width: 150px;">일반 품목: &nbsp;&nbsp;&nbsp;3 개</th>
+										  <th class="text-right card-sm-font p-1">합계: &nbsp;&nbsp;&nbsp;<span style="color: #0acf97">33,000 원</span></th>
+										</tr>
+									  </thead>
+									</table>
+								</div>
+							</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+									<div class="row">
+										
+                                        <div class="col-md-2">
+											<div class="input-group mb-2 pb-1 mute">
+												<input class="form-control" type="text" placeholder="입력..." aria-label="search">
+												<div class="input-group-prepend">
+													<button class="btn btn-light btn-sm my-0" type="button" style="box-shadow: none; border-radius: 0px;">조회</button>
+												</div>
+											</div>
+											
+											<div class="table-responsive category-table mute">
+											<table class="table table-hover fixed-head">
+												<thead class="thead-light" align="center">
+													<th>품목분류</th>
+												</thead>
+												<tbody align="center">
+													<tr >
+														<td class="p-2 m-0">전체</td>
+													</tr>
+													<tr >
+														<td class="p-2 m-0">육류</td>
+													</tr>
+													<tr >
+														<td class="p-2 m-0">채소류</td>
+													</tr>
+													<tr >
+														<td class="p-2 m-0">과일류</td>
+													</tr>
+													<tr >
+														<td class="p-2 m-0">증정품</td>
+													</tr>
+													<tr >
+														<td class="p-2 m-0">냉동식품</td>
+													</tr>
+													<tr >
+														<td class="p-2 m-0">음료</td>
+													</tr>
+												</tbody>
+											</table>
+											</div>
+											
+                                        </div> <!-- end col -->
+										
+										<!--웹용 테이블-->
+                                        <div class="col-md-10 mute">
+											<div>
+												<span class="float-left mb-3" style="font-size: 20px; font-weight: bold">2019년 4월 26일 배송분</span>
+												<button class="btn btn-success float-right ml-1" data-toggle="modal" data-target="#addMemo" style="box-shadow: none; border-radius: 0px; font-size: 14px; font-weight: bolder">장바구니 (3)</button>
+												<button class="btn btn-danger float-right ml-1" data-toggle="modal" data-target="#noOrder" style="box-shadow: none; border-radius: 0px; font-size: 14px; font-weight: bolder"> 주문 없음</button>
+												<button class="btn btn-light float-right ml-1" data-toggle="modal" data-target="#order-check" style="box-shadow: none; border-radius: 0px; font-size: 14px; font-weight: bolder">주문내역 검토</button>
+												<button class="btn btn-light float-right" style="box-shadow: none; border-radius: 0px; font-size: 14px; font-weight: bolder">To Excel</button>
+											</div>
+											
+											<div class="table-responsive product-table">
+											<table class="table table-hover fixed-head">
+												<thead class="thead-light">
+													<th class="nowrap">코드</th>
+													<th class="nowrap">품명</th>
+													<th class="nowrap">수량</th>
+													<th class="nowrap">규격</th>
+													<th class="nowrap">단위</th>
+													<th class="nowrap">단가</th>
+													<th class="nowrap">금액</th>
+													<th class="nowrap">공급가액</th>
+													<th class="nowrap">부가세액</th>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+													<tr>
+														<td class="align-middle nowrap">3021</td>
+														<td class="align-middle nowrap">
+															<div class="mr-3 product-img" style="background-image: url(assets/images/food1.jpg);" data-toggle="modal" data-target="#productDetail"></div>
+															<div class="pName d-inline-block align-middle">
+																<a href="#" class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</a>
+															</div>
+														</td>
+														<td class="align-middle nowrap">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+														<td class="align-middle nowrap">10kg/통</td>
+														<td class="align-middle nowrap">1</td>
+														<td class="align-middle nowrap">5700</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+														<td class="align-middle nowrap">20000</td>
+													</tr>
+												</tbody>
+											</table>
+												</div>
+                                        </div><!-- end col -->
+										
+										<!--모바일용 테이블 yes이미지-->
+										<div class="col-lg-10 d-md-none">
+											<div class="row mb-1">
+												<div class="dropdown col-5">
+												  <button class="btn btn-light btn-sm dropdown-toggle w-100 mb-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="box-shadow: none; font-size: 12px; height: 31.953px;">
+													품목분류
+												  </button>
+												  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="#">전체</a>
+													<a class="dropdown-item" href="#">육류</a>
+													<a class="dropdown-item" href="#">채소류</a>
+												  </div>
+												</div>
+												
+												<div class="input-group input-group-sm mb-0 pb-0 pl-0 col-7">
+													<input class="form-control" type="text" placeholder="입력..." aria-label="search">
+													<div class="input-group-prepend">
+														<button class="btn btn-light btn-sm my-0" type="button" style="font-size: 12px">조회</button>
+													</div>
+												</div>
+
+											</div>
+											<table class="table table-centered table-sm w-100 nowrap" id="products-datatable2">											
+												<thead class="thead-light d-none">
+													<tr>
+														<th class="card-sm-font">이미지</th>
+														<th class="card-sm-font">품명</th>
+														<th class="card-sm-font">수량</th>
+													</tr>
+												</thead>
+												
+												<tbody>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td class="pl-0">
+															<div class="product-img" style="background-image: url(assets/images/food4.jpeg);" data-toggle="modal" data-target="#productDetail"></div>
+														</td>
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box]</small>&nbsp;&nbsp;<span style="color: rgba(186,0,2,1.00); font-size: 11px;">11,000 원</span>
+															</div>
+														</td>
+														<td class="pr-0">
+															<div class="qty" style="float: right">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width: 25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+                                        </div>
+										<!--모바일용 테이블 no이미지-->
+										<!--
+										<div class="col-lg-10 d-md-none">
+											<div class="row mb-1">
+												<div class="dropdown col-5">
+												  <button class="btn btn-light btn-sm dropdown-toggle w-100 mb-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="box-shadow: none; font-size: 12px; height: 31.953px;">
+													품목분류
+												  </button>
+												  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="#">전체</a>
+													<a class="dropdown-item" href="#">육류</a>
+													<a class="dropdown-item" href="#">채소류</a>
+												  </div>
+												</div>
+												
+												<div class="input-group input-group-sm mb-0 pb-0 pl-0 col-7">
+													<input class="form-control" type="text" placeholder="입력..." aria-label="search">
+													<div class="input-group-prepend">
+														<button class="btn btn-light btn-sm my-0" type="button" style="font-size: 12px">조회</button>
+													</div>
+												</div>
+
+											</div>
+											<table class="table table-centered table-sm w-100 nowrap" id="products-datatable2">
+												
+												<thead class="thead-light d-none">
+													<tr>
+														<th class="card-sm-font">품명</th>
+														<th class="card-sm-font">단가</th>
+														<th class="card-sm-font">수량</th>
+													</tr>
+												</thead>
+												
+												<tbody>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													<tr>											
+														<td class="">
+															<div class="pName2 d-inline-block align-middle">
+																<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+																<br>
+																<small style="font-size: 11px;">[10kg/box][1]</small>
+															</div>
+														</td>
+														<td class="black" style="font-size: 12px;">125,700 원</td>
+														<td class="">
+															<div class="qty">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+																</span>
+																<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+																<span>
+																	<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 20px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+																</span>
+															</div>
+														</td>
+													</tr>
+													
+												</tbody>
+											</table>
+                                        </div>
+										-->
+									   </div>
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </div> 
+                    </div>
+
+					<div class="btn-group bg-white fixBtn fixed d-md-none" style="height: 40px">
+						<button class="btn btn-light" data-toggle="modal" data-target="#noOrder" style="box-shadow: none; border-radius: 0px; font-size: 14px; font-weight: bolder"> 주문 없음</button>
+						<button class="btn btn-success" data-toggle="modal" data-target="#addMemo" style="box-shadow: none; border-radius: 0px; font-size: 14px; font-weight: bolder">장바구니 (3)</button>
+					</div>
+					
+					</div> 
+
+                </div> <!-- container -->
+				
+				
+				<!--팝업 모음-->
+			
+				<!--주문내역 검토 팝업-->
+				<div class="modal fade" id="order-check" tabindex="-1" role="dialog" aria-labelledby="order-check-ModalTitle" aria-hidden="true">
+					<div class="modal-dialog modal-full-width" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="order-check-ModalTitle">주문내역 검토</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="table-responsive">
+									<table class="table table-hover table-sm">
+										<thead class="thead-light">
+											<th class="nowrap">코드</th>
+											<th class="nowrap">품명</th>
+											<th class="nowrap">수량</th>
+											<th class="nowrap">규격</th>
+											<th class="nowrap">단위</th>
+											<th class="nowrap">단가</th>
+											<th class="nowrap">금액</th>
+											<th class="nowrap">공급가액</th>
+											<th class="nowrap">부가세액</th>
+											<th class="nowrap">시세품</th>
+											<th class="nowrap">분류코드</th>
+											<th class="nowrap">분류명</th>
+											<th class="nowrap">발주단위</th>
+											<th class="nowrap">최소발주</th>
+											<th class="nowrap">최대발주</th>
+											<th class="nowrap">품목정보</th>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="align-middle nowrap">3021</td>
+												<td class="align-middle nowrap">
+													<div class="pName d-inline-block align-middle">
+														<span class="text-body font-16">매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠매운 닭강정이라고 합니다 저는 아주맛있죠</span>
+													</div>
+												</td>
+												<td class="align-middle nowrap">5</td>
+												<td class="align-middle nowrap">10kg/통</td>
+												<td class="align-middle nowrap">1</td>
+												<td class="align-middle nowrap">5700</td>
+												<td class="align-middle nowrap">20000</td>
+												<td class="align-middle nowrap">20000</td>
+												<td class="align-middle nowrap">20000</td>
+												<td class="align-middle nowrap">o</td>
+												<td class="align-middle nowrap">20</td>
+												<td class="align-middle nowrap">육류</td>
+												<td class="align-middle nowrap">1</td>
+												<td class="align-middle nowrap">1</td>
+												<td class="align-middle nowrap">999</td>
+												<td class="align-middle nowrap">-</td>
+											</tr>
+											<tr>
+												<td class="align-middle nowrap">3021</td>
+												<td class="align-middle nowrap">
+													<div class="pName d-inline-block align-middle">
+														<span class="text-body font-16">매운 닭강정</span>
+													</div>
+												</td>
+												<td class="align-middle nowrap">5</td>
+												<td class="align-middle nowrap">10kg/통</td>
+												<td class="align-middle nowrap">1</td>
+												<td class="align-middle nowrap">5700</td>
+												<td class="align-middle nowrap">20000</td>
+												<td class="align-middle nowrap">20000</td>
+												<td class="align-middle nowrap">20000</td>
+												<td class="align-middle nowrap">o</td>
+												<td class="align-middle nowrap">20</td>
+												<td class="align-middle nowrap">육류</td>
+												<td class="align-middle nowrap">1</td>
+												<td class="align-middle nowrap">1</td>
+												<td class="align-middle nowrap">999</td>
+												<td class="align-middle nowrap">-</td>
+											</tr>
+											<tr>
+												<td class="align-middle nowrap">3021</td>
+												<td class="align-middle nowrap">
+													<div class="pName d-inline-block align-middle">
+														<span class="text-body font-16">매운 닭강정</span>
+													</div>
+												</td>
+												<td class="align-middle nowrap">5</td>
+												<td class="align-middle nowrap">10kg/통</td>
+												<td class="align-middle nowrap">1</td>
+												<td class="align-middle nowrap">5700</td>
+												<td class="align-middle nowrap">20000</td>
+												<td class="align-middle nowrap">20000</td>
+												<td class="align-middle nowrap">20000</td>
+												<td class="align-middle nowrap">o</td>
+												<td class="align-middle nowrap">20</td>
+												<td class="align-middle nowrap">육류</td>
+												<td class="align-middle nowrap">1</td>
+												<td class="align-middle nowrap">1</td>
+												<td class="align-middle nowrap">999</td>
+												<td class="align-middle nowrap">-</td>
+											</tr>
+										</tbody>
+									</table>
+								</div> <!--end table-responsive-->
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+			
+			
+				<!--주문없음 팝업-->
+				<div id="noOrder" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content">
+							<div class="modal-body p-4">
+								<div class="text-center">
+									<i class="dripicons-information h1 text-info"></i>
+									<h4 class="mt-2">주문없음</h4>
+									<p class="mt-3">"주문없음"으로 전송하시겠습니까?</p>
+									<button class="btn btn-light" data-toggle="modal" data-target="#noOrderSucceed" data-dismiss="modal" aria-label="Close">계속</button>
+								</div>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+			
+				<!--주문서 없음 처리 팝업 -->
+				<div id="noOrderSucceed" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content modal-filled bg-success">
+							<div class="modal-body p-4">
+								<div class="text-center">
+									<i class="dripicons-checkmark h1"></i>
+									<h4 class="mt-2">주문없음</h4>
+									<p class="mt-3">"주문없음"으로 처리되었습니다.</p>
+									<button class="btn btn-light my-2" data-dismiss="modal">확인</button>
+								</div>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				
+				<!-- 주문서 전송 실패 팝업 -->
+				<div id="transmitted-fail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-md">
+						<div class="modal-content modal-filled bg-danger">
+							<div class="modal-body p-4">
+								<div class="text-center">
+									<i class="dripicons-wrong h1"></i>
+									<h4 class="mt-2">주문서 전송 실패</h4>
+
+									<div class="alert alert-danger mt-3 pt-3 pb-2" role="alert">
+										<p>여신한도 <strong>92,000,000</strong>&nbsp;/&nbsp; 최종미수금 <strong>94,500,000</strong></p>
+										<p>한도초과로 인하여 주문서 전송이 <strong>불가능</strong> 한 상태입니다.</p>
+										<p>아래 계좌번호로 입금 부탁드립니다.</p>
+									</div>
+
+									<div class="alert alert-warning mt-3" role="alert">
+										<strong>농협 </strong>302-8801-254-51 
+									</div>
+									<button type="button" class="btn btn-light my-2" data-dismiss="modal">확인</button>
+								</div>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				
+				<!--장바구니-->
+				<div id="addMemo" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-scrollable">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">장바구니</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body pt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-widgets">
+                                            <a href="#" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                                        </div>
+										<div class="pName3 d-inline-block">
+											<span class="black" style="font-size: 14px;">[매운 닭강정[매운 닭강정[매운 닭강정][매운닭강정]</span>
+										</div>
+										<table class="table table-centered table-bordered table-sm w-100 mt-2 mb-2">
+											<thead class="bg-light" style="font-size: 12px;">
+												<th>단가</th>
+												<th>공급가액</th>
+												<th>부가세액</th>
+											</thead>
+											<tbody style="font-size: 12px;">
+												<tr>
+													<td>11,000 원</td>
+													<td>10,000</td>
+													<td>1,000</td>
+												</tr>
+											</tbody>
+										</table>
+										<textarea class="form-control" id="example-textarea3" rows="1" placeholder="메모를 입력하세요..."></textarea>
+										<hr class="mt-2 mb-1" width="100%">
+										<div class="qty d-inline-block">
+											<span>
+												<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+											</span>
+											<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+											<span>
+												<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+											</span>
+										</div>
+										<div class="d-inline-block" style="color: rgba(186,0,2,1.00); float: right; font-weight: bold">금액 : 11,000 원</div>
+										
+                                    </div>
+                                </div> <!-- end card-->
+								<div class="card">
+                                    <div class="card-body">
+                                        <div class="card-widgets">
+                                            <a href="#" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                                        </div>
+										<div class="pName3 d-inline-block">
+											<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+										</div>
+										<table class="table table-centered table-bordered table-sm w-100 mt-2 mb-2">
+											<thead class="bg-light" style="font-size: 12px;">
+												<th>단가</th>
+												<th>공급가액</th>
+												<th>부가세액</th>
+											</thead>
+											<tbody style="font-size: 12px;">
+												<tr>
+													<td>11,000 원</td>
+													<td>10,000</td>
+													<td>1,000</td>
+												</tr>
+											</tbody>
+										</table>
+										<textarea class="form-control" id="example-textarea3" rows="1" placeholder="메모를 입력하세요..."></textarea>
+										<hr class="mt-2 mb-1" width="100%">
+										<div class="qty d-inline-block">
+											<span>
+												<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+											</span>
+											<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+											<span>
+												<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+											</span>
+										</div>
+										<div class="d-inline-block" style="color: rgba(186,0,2,1.00); float: right; font-weight: bold">금액 : 11,000 원</div>
+										
+                                    </div>
+                                </div> <!-- end card-->
+								<div class="card">
+                                    <div class="card-body">
+                                        <div class="card-widgets">
+                                            <a href="#" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                                        </div>
+										<div class="pName3 d-inline-block">
+											<span class="black" style="font-size: 14px;">[매운 닭강정]</span>
+										</div>
+										<table class="table table-centered table-bordered table-sm w-100 mt-2 mb-2">
+											<thead class="bg-light" style="font-size: 12px;">
+												<th>단가</th>
+												<th>공급가액</th>
+												<th>부가세액</th>
+											</thead>
+											<tbody style="font-size: 12px;">
+												<tr>
+													<td>11,000 원</td>
+													<td>10,000</td>
+													<td>1,000</td>
+												</tr>
+											</tbody>
+										</table>
+										<textarea class="form-control" id="example-textarea3" rows="1" placeholder="메모를 입력하세요..."></textarea>
+										<hr class="mt-2 mb-1" width="100%">
+										<div class="qty d-inline-block">
+											<span>
+												<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+											</span>
+											<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+											<span>
+												<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+											</span>
+										</div>
+										<div class="d-inline-block" style="color: rgba(186,0,2,1.00); float: right; font-weight: bold">금액 : 11,000 원</div>
+										
+                                    </div>
+                                </div> <!-- end card-->
+							</div>
+							<div class="modal-footer d-block">
+								<textarea class="form-control" id="example-textarea0" rows="3" placeholder="물류센터에 전달하고 싶은 사항을 입력하시면 배송처리 시 참고합니다"></textarea>
+								<div class="btn-group m-0 w-100">
+									<button class="btn btn-light mt-2 mr-1" data-toggle="modal" data-target="#transmitted" data-dismiss="modal" aria-label="Close" style="box-shadow: none">닫기</button>
+									<button class="btn btn-success mt-2" data-toggle="modal" data-target="#transmitted" data-dismiss="modal" aria-label="Close" style="box-shadow: none">총 3품목 33,000원 주문하기</button>
+								</div>
+
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal --
+				
+				<!-- 주문서 전송 성공 팝업 -->
+				<div id="transmitted" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content modal-filled bg-success">
+							<div class="modal-body p-4">
+								<div class="text-center">
+									<i class="dripicons-checkmark h1"></i>
+									<h4 class="mt-2">주문서 전송 완료</h4>
+									<p class="mt-3">성공적으로 주문서가 전송되었습니다.</p>
+									<button class="btn btn-light my-2" data-dismiss="modal">확인</button>
+								</div>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				
+			
+				<!--물건 상세정보 팝업-->
+				<div class="modal fade" id="productDetail" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-scrollable" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="scrollableModalTitle">물건 상세정보 - [코드번호:3021]</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								
+								
+								<img src="assets/images/food1.jpg" class="img-fluid" alt="Responsive image">
+							
+								<div class="mt-3">
+									<p style="font-size: 15px; font-weight: bold">[매운 닭강정]전용 소스-아주 매운맛, 매운맛, 덜매운맛 - 3종 세트로 구성 / 주문시 분할포장 가능</p>
+								</div>
+								<div class="mb-3">
+									판매단가 : <strong style="color: rgba(186,0,2,1.00);">11,000 원</strong>
+									<div class="qty" style="float: right">
+											<span>
+												<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><span class="mdi mdi-chevron-down minus"></span></button>
+											</span>
+											<input type="number" class="align-middle count black" name="qty" value="" placeholder="box" style="height: 25px; width: 40px; font-size: 11px">
+											<span>
+												<button class="align-middle btn btn-light p-0" style="box-shadow: none; height: 25px; width:25px; line-height: 1"><i class="mdi mdi-chevron-up plus"></i></button>
+											</span>
+									</div>
+								</div>
+								
+								<div class="mb-3">
+									<div class="d-flex">
+										<textarea class="form-control" id="memo-input" rows="2" placeholder="메모를 입력하세요..."></textarea>
+										<button class="btn btn-success ml-1" data-dismiss="modal" style="box-shadow: none">장바구니 담기</button>
+									</div>
+								</div>
+								
+								<div class="table-responsive-sm mt-2">
+									<table class="table table-sm table-bordered table-centered mb-0">
+										<thead class="thead-light">
+											<tr>
+												<th>품목분류</th>
+												<th>공급가액</th>
+												<th>부가세액</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>육류가공</td>
+												<td>10,000</td>
+												<td>1,000</td>
+											</tr>
+										</tbody>
+										<thead class="thead-light">
+											<tr>
+												<th>규격</th>
+												<th>단위</th>
+												<th>시세품</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>10kg/box</td>
+												<td>1</td>
+												<td>-</td>
+											</tr>
+										</tbody>
+										<thead class="thead-light">
+											<tr>
+												<th>발주단위</th>
+												<th>최소발주</th>
+												<th>최대발주</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>2</td>
+												<td>2</td>
+												<td>9999</td>
+											</tr>
+										</tbody>
+										<thead class="thead-light">
+											<tr > 
+												<th colspan="3">제품정보</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td colspan="3">
+													[크래프트사인 업체발송] 오더픽업리턴 안내표시판 29x10cm (부착형)
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div> <!-- end table-responsive-->
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+            </div> <!-- content -->
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+
+   		<!-- App js -->
+		<script src="assets/js/app.min.js"></script>
+		<script src="assets/js/vendor/jquery.dataTables.min.js"></script>
+		<script src="assets/js/vendor/dataTables.bootstrap4.js"></script>
+		<script src="assets/js/vendor/dataTables.responsive.min.js"></script>
+		<script src="assets/js/vendor/responsive.bootstrap4.min.js"></script>
+		<script src="assets/js/vendor/dataTables.checkboxes.min.js"></script>
+		
+		<!--수량입력기 js-->
+		<script>
+			$(document).ready(function(){
+				$('.count').prop('disabled', true);
+				$(document).on('click','.plus',function(){
+					$('.count').val(parseInt($('.count').val()) + 1 );
+				});
+				$(document).on('click','.minus',function(){
+					$('.count').val(parseInt($('.count').val()) - 1 );
+						if ($('.count').val() == 0) {
+							$('.count').val(1);
+						}
+					});
+			});
+		</script>
+		
+		<!--테이블 js-->
+		<script>
+			$(document).ready(function() {
+				"use strict";
+
+				$('#producㄴts-datatable').DataTable({
+					"searching": false,
+					"ordering": false,
+					"select": {
+						"style": "multi"
+					},
+					"order": [[ 1, "asc" ]],
+					"drawCallback": function () {
+						$('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+					},
+					"scrollY": "550px",
+					"scrollCollapse": true,
+					"paging": false,
+					"info": false,
+					"dom": '<"toolbar">frtip'
+				});
+
+				$('#products-datatable2').DataTable({
+					"searching": false,
+					"ordering": false,
+					"select": {
+						"style": "multi"
+					},
+					"order": [[ 1, "asc" ]],
+					"drawCallback": function () {
+						$('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+					},
+					"scrollY": "600px",
+					"scrollCollapse": true,
+					"paging": false,
+					"info": false,
+					"dom": '<"toolbar2">frtip',
+				});
+			} );
+		</script>
+		
+		<!--드론다운 메뉴 클릭후 세이브 js-->
+		<script>
+			 $(function(){
+
+				$(".dropdown-menu a").click(function(){
+
+				  $("#dropdownMenuButton:first-child").text($(this).text());
+				  $("#dropdownMenuButton:first-child").val($(this).text());
+
+			   });
+
+			});
+		</script>
+		
+		
+</body>
+
+</html>

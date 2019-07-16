@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>발주닷컴-로그인</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- App favicon -->
+        <link rel="#" href="#">
+
+        <!-- third party css -->
+
+        <!-- third party css end -->
+
+        <!-- App css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+		
+		<!-- font -->
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
+		
+		<style>
+			@media (max-width: 767.98px){
+				.formWidth {
+					width: 100%;
+				}
+			}
+			
+			@media (min-width: 768px){
+				.formWidth {
+					width: 25%;
+				}
+			}
+
+		</style>
+		
+    </head>
+
+    <body class="" style="background-color: #F2F5F7">
+
+        <div class="account-pages mt-5 mb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="card mb-0">
+							
+							<!--tab list-->
+							<ul class="nav nav-tabs nav-bordered">
+								<li class="nav-item">
+									<a href="#tiba-ys" data-toggle="tab" aria-expanded="true" class="nav-link active">
+										<span class="d-none d-lg-block">티바치킨 연수점</span>
+										<div class="d-lg-none d-block">1</div>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="#tiba-sd" data-toggle="tab" aria-expanded="false" class="nav-link">
+										<span class="d-none d-lg-block">티바치킨 송도점</span>
+										<div class="d-lg-none d-block">2</div>
+									</a>
+								</li>
+							</ul>
+
+                            <div class="card-body p-4">
+								
+								<div class="tab-content">
+									<!--tab1-->
+									<div class="tab-pane show active" id="tiba-ys">
+										<form action="#">
+
+											<div class="m-auto form-group formWidth">
+												<label for="code">가맹점 코드</label>
+												<input class="form-control mb-3" type="email" id="code" required="" placeholder="코드입력...">
+											</div>
+
+											<div class="m-auto form-group formWidth">
+												<label for="password">비밀번호</label>
+												<input class="form-control" type="password" required="" id="password" placeholder="비밀번호 입력...">
+											</div>
+
+											<div class="m-auto form-group formWidth">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" id="checkbox-signin" checked>
+													<label class="custom-control-label mt-3 mb-3" for="checkbox-signin">자동로그인</label>
+												</div>
+											</div>
+
+											<div class="m-auto formWidth">
+												<div class="text-center">
+												<a href="index.html" class="btn btn-outline-success">로그인</a>
+												<a href="#" class="btn btn-outline-success" data-toggle="modal" data-target="#changeSetting">환경설정</a>
+												<a href="#" class="btn btn-outline-success"><i class="mdi mdi-account-plus-outline"></i>&nbsp;추가</a>
+												</div>
+											</div>
+										</form>
+									</div> <!--tab1-->
+									
+									<!--tab2-->
+									<div class="tab-pane" id="tiba-sd">
+										<form action="#">
+
+											<div class="m-auto form-group formWidth">
+												<label for="emailaddress">카맹점 코드</label>
+												<input class="form-control mb-3" type="email" id="code2" required="" placeholder="코드입력...">
+											</div>
+
+											<div class="m-auto form-group formWidth">
+												<label for="password">비밀번호</label>
+												<input class="form-control" type="password" required="" id="password2" placeholder="비밀번호 입력...">
+											</div>
+
+											<div class="m-auto form-group formWidth">
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" id="checkbox-signin2" checked>
+													<label class="custom-control-label mt-3 mb-3" for="checkbox-signin">자동로그인</label>
+												</div>
+											</div>
+
+											<div class="m-auto formWidth">
+												<div class="text-center">
+												<a href="index.htm" class="btn btn-outline-success">로그인</a>
+												<a href="#" class="btn btn-outline-success" data-toggle="modal" data-target="#changeSetting">환경설정</a>
+												<a href="#" class="btn btn-outline-success"><i class="mdi mdi-account-plus-outline"></i>&nbsp;추가</a>
+												</div>
+											</div>
+										</form>
+									</div> <!--tab2-->
+									
+								</div> <!--end tabcontent-->
+
+                            </div> <!-- end card-body -->
+                        </div>
+                        <!-- end card -->
+
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+				
+				<!--팝업 모음-->
+				
+				<!--비밀번호 변경-->
+				<div id="changeSetting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">환경설정</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body pt-0">
+								<div class="text-center mt-2 mb-4">
+									
+								</div>
+
+								<form class="pl-3 pr-3" action="#">
+									
+									<div class="form-group">
+										<div class="dropdown">
+										  <button class="btn btn-light dropdown-toggle w-100 mb-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="box-shadow: none">
+											엑셀 출력 방식
+										  </button>
+										  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<a class="dropdown-item" href="#">발주 및 검수 일지</a>
+											<a class="dropdown-item" href="#">발주서</a>
+										  </div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="dropdown">
+										  <button class="btn btn-light dropdown-toggle w-100 mb-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="box-shadow: none">
+											주문물품 정렬 방식
+										  </button>
+										  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<a class="dropdown-item" href="#">품명순</a>
+											<a class="dropdown-item" href="#">코드순</a>
+											<a class="dropdown-item" href="#">본사 설정순</a>
+											<a class="dropdown-item" href="#">주문한 품목순</a>
+										  </div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="currentPass">연결 서버</label>
+										<input class="form-control" type="password" id="currentPass" required="" placeholder="">
+									</div>
+
+									<div class="form-group">
+										<label for="newPass">서버 명칭</label>
+										<input class="form-control" type="password" id="newPass" required="" placeholder="">
+									</div>
+									
+									<div class="form-group">
+										<label for="newPass">구분 서버</label>
+										<input class="form-control" type="password" id="newPassConfirm" required="" placeholder="">
+									</div>
+
+									<div class="form-group text-center mt-3">
+										<button class="btn btn-primary" type="submit">저장하기</button>
+									</div>
+
+								</form>
+
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end page -->
+
+        <!-- App js -->
+        <script src="assets/js/app.min.js"></script>
+		
+		<!--드론다운 메뉴 클릭후 세이브 js-->
+		<script>
+			 $(function(){
+
+				$(".dropdown-menu a").click(function(){
+
+				  $("#dropdownMenuButton:first-child").text($(this).text());
+				  $("#dropdownMenuButton:first-child").val($(this).text());
+
+			   });
+
+			});
+		</script>
+    </body>
+</html>

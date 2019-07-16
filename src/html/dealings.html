@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>발주닷컴-거래장부</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="#">
+
+        <!-- third party css -->
+		<link href="assets/css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/vendor/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+        <!-- third party css end -->
+
+        <!-- App css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+		
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+		
+		<!-- font -->
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
+
+		<style>
+			@media (max-width: 767.98px){
+				#title{font-size: 0.75rem}
+				
+				.card-body {
+					padding: 12px;
+				}
+				.logo-center {
+					text-align: center;
+				}
+				.t-none {
+					display: none;
+				}
+			}
+			
+			@media (min-width: 768px){
+			}
+			
+			.container-fluid {
+				padding: 0;
+			}
+			.card {
+				margin-bottom: 15px;
+			}
+			.wrapper {
+				margin-top: 70px;
+			}
+			
+			.dealing-table {
+				height: 550px;
+				overflow: scroll;
+			}
+			
+			.fixed-head th{position: sticky;top: 0;z-index: 10; border-bottom: thick; border-top: thick}
+			
+			.nowrap {
+				white-space: nowrap;
+			}
+		</style>
+		
+
+    </head>
+
+    <body data-layout="detached" style="background-color: #F2F5F7">
+
+        @@include('./partials/topbar.html')
+
+        <div class="container-fluid">
+
+            <div class="wrapper">
+                @@include('./partials/sidebar.html')                
+
+                <div class="content-page">
+                    <div class="content">
+						
+						<div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+										<div class="row">
+											<div class="col-4">
+                                        		<h5 class="mt-1 mb-3" id="title">거래장부 열람</h5>
+											</div>
+											<div class="col-8">
+												<div class="text-right">
+													<div class="form-group">
+														<button class="btn btn-light btn-sm d-none d-md-inline mr-1 align-middle" style="box-shadow: none;">To Excel</button>
+														<div id="dateRange" class="form-control d-inline align-middle align-middle" data-toggle="date-picker-range" data-target-display="#selectedValue"  data-cancel-class="btn-light">
+															<i class="mdi mdi-calendar"></i>&nbsp;
+															<span id="selectedValue"></span> <i class="mdi mdi-menu-down"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+                                        <ul class="nav nav-tabs mb-3">
+                                            <li class="nav-item">
+                                                <a href="#date" data-toggle="tab" aria-expanded="true" class="nav-link active">
+                                                    <span class="">날짜별 내역</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#product" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                                    <span class="">품목별 합계표</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane show active" id="date">
+												<div class="row table-responsive m-0 dealing-table">
+													<table class="table table-hover fixed-head">
+														<thead class="thead-light">
+															<tr>
+																<th class="t-none nowrap">No</th>
+																<th class="nowrap">날짜</th>
+																<th class="t-none nowrap">코드</th>
+																<th class="nowrap">품명</th>
+																<th class="t-none nowrap">규격</th>
+																<th class="nowrap">단위</th>
+																<th class="nowrap">수량</th>
+																<th class="t-none nowrap">반품</th>
+																<th class="t-none nowrap">단가</th>
+																<th class="t-none nowrap">공급가액</th>
+																<th class="t-none nowrap">부가세액</th>
+																<th class="nowrap">합계금액</th>
+																<th class="t-none nowrap">공제금액</th>
+																<th class="nowrap">결제금액</th>
+																<th class="t-none nowrap">잔액</th>
+																<th class="t-none nowrap">품목메모</th>
+																<th class="t-none nowrap">전표메모</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+																<td class="t-none nowrap">1000</td>
+																<td class="nowrap">47000</td>
+																<td class="t-none nowrap">4000</td>
+																<td class="t-none nowrap">분할포장 바람.</td>
+																<td class="t-none nowrap">-</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+																<td class="t-none nowrap">1000</td>
+																<td class="nowrap">47000</td>
+																<td class="t-none nowrap">4000</td>
+																<td class="t-none nowrap">분할포장 바람.</td>
+																<td class="t-none nowrap">-</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+																<td class="t-none nowrap">1000</td>
+																<td class="nowrap">47000</td>
+																<td class="t-none nowrap">4000</td>
+																<td class="t-none nowrap">분할포장 바람.</td>
+																<td class="t-none nowrap">-</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+																<td class="t-none nowrap">1000</td>
+																<td class="nowrap">47000</td>
+																<td class="t-none nowrap">4000</td>
+																<td class="t-none nowrap">분할포장 바람.</td>
+																<td class="t-none nowrap">-</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+																<td class="t-none nowrap">1000</td>
+																<td class="nowrap">47000</td>
+																<td class="t-none nowrap">4000</td>
+																<td class="t-none nowrap">분할포장 바람.</td>
+																<td class="t-none nowrap">-</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+																<td class="t-none nowrap">1000</td>
+																<td class="nowrap">47000</td>
+																<td class="t-none nowrap">4000</td>
+																<td class="t-none nowrap">분할포장 바람.</td>
+																<td class="t-none nowrap">-</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+																<td class="t-none nowrap">1000</td>
+																<td class="nowrap">47000</td>
+																<td class="t-none nowrap">4000</td>
+																<td class="t-none nowrap">분할포장 바람.</td>
+																<td class="t-none nowrap">-</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+																<td class="t-none nowrap">1000</td>
+																<td class="nowrap">47000</td>
+																<td class="t-none nowrap">4000</td>
+																<td class="t-none nowrap">분할포장 바람.</td>
+																<td class="t-none nowrap">-</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+                                            </div>
+                                            <div class="tab-pane" id="product">
+												<div class="row table-responsive m-0 dealing-table">
+													<table class="table table-hover fixed-head">
+														<thead class="thead-light">
+															<tr>
+																<th class="t-none nowrap">No</th>
+																<th class="nowrap">날짜</th>
+																<th class="t-none nowrap">코드</th>
+																<th class="nowrap">품명</th>
+																<th class="t-none nowrap">규격</th>
+																<th class="nowrap">단위</th>
+																<th class="nowrap">수량</th>
+																<th class="t-none nowrap">반품</th>
+																<th class="t-none nowrap">단가</th>
+																<th class="t-none nowrap">공급가액</th>
+																<th class="t-none nowrap">부가세액</th>
+																<th class="nowrap">합계금액</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+															</tr>
+															<tr>
+																<td class="t-none nowrap">1</td>
+																<td class="nowrap">20190424</td>
+																<td class="t-none nowrap">3021</td>
+																<td class="nowrap">닭가슴살</td>
+																<td class="t-none nowrap">10kg/box</td>
+																<td class="nowrap">2</td>
+																<td class="nowrap">4</td>
+																<td class="t-none nowrap">0</td>
+																<td class="t-none nowrap">12000</td>
+																<td class="t-none nowrap">10000</td>
+																<td class="t-none nowrap">2000</td>
+																<td class="nowrap">48000</td>
+															</tr>
+															
+														</tbody>
+													</table>
+												</div>
+                                            </div>
+                                        </div><!--end tab content-->
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div><!-- end col-12 -->
+						</div><!-- end row -->   
+					</div> <!-- content -->
+                </div> <!-- content-page -->
+            </div> <!-- end wrapper-->
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- END Container -->
+
+        <!-- App js -->
+        <script src="assets/js/app.min.js"></script>
+
+        <!-- third party js -->
+		<script src="assets/js/vendor/jquery-ui.min.js"></script>
+        <!-- third party js ends -->
+
+        <!-- third party js -->
+        <script src="assets/js/vendor/responsive.bootstrap4.min.js"></script>
+        <script src="assets/js/vendor/buttons.bootstrap4.min.js"></script>
+        <!-- third party js ends -->
+
+		<!--날짜선택 js-->
+		<script type="text/javascript">
+		$(function() {
+
+			var start = moment().subtract(29, 'days');
+			var end = moment();
+
+			function cb(start, end) {
+				$('#dateRange').html(start.format('YYYY MM DD') + ' - ' + end.format('MM DD'));
+			}
+
+			$('#dateRange').daterangepicker({
+				startDate: start,
+				endDate: end,
+				ranges: {
+				   '오늘': [moment(), moment()],
+				   '어제': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+				   '최근 7일': [moment().subtract(6, 'days'), moment()],
+				   '이번 달': [moment().startOf('month'), moment().endOf('month')],
+				   '저번 달': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+				   '6개월': [moment().subtract(6, 'month').startOf('month'),  moment()],
+				   '1년': [moment().subtract(12, 'month').startOf('month'),  moment()]
+				},
+				"locale": {
+					"format": "YYYY/MM/DD",
+					"separator": " - ",
+					"applyLabel": "적용",
+					"cancelLabel": "취소",
+					"fromLabel": "에서",
+					"toLabel": "까",
+					"customRangeLabel": "직접선택",
+					"weekLabel": "",
+					"daysOfWeek": [
+						"일",
+						"월",
+						"화",
+						"수",
+						"목",
+						"금",
+						""
+					],
+					"monthNames": [
+						"1월",
+						"2월",
+						"3월",
+						"4월",
+						"5월",
+						"6월",
+						"7월",
+						"8월",
+						"9월",
+						"10월",
+						"11월",
+						"12월"
+					],
+					"firstDay": 1
+				},
+			}, cb);
+
+			cb(start, end);
+
+		});
+		</script>
+
+    </body>
+
+</html>
